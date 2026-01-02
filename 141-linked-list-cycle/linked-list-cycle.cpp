@@ -9,12 +9,13 @@
 class Solution {
 public:
     bool hasCycle(ListNode *head) {
-        ListNode *fast = head ;
-        ListNode *slow = head ;
-        while ( fast && fast->next ) {
-            fast = fast->next->next ;
-            slow = slow->next ;
-            if ( slow == fast ) return true ;
+        // Approach 1 : HashMap ( Trace Appearance ) 
+        unordered_map<ListNode*,int> umap ;
+        ListNode* curr = head ;
+        while ( curr ) {
+            if ( umap.count(curr) ) return true ;
+            umap[curr]++ ;
+            curr = curr->next ;
         }
         return false ;
     }
