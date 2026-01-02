@@ -1,6 +1,8 @@
 class Solution {
 public:
     int minSubArrayLen(int target, vector<int>& nums) {
+        // Approach 1 : Sliding Window 
+        // TC : O(N) , SC : O(1)
         int n = nums.size() ;
         int ans = INT_MAX ;
         int l = 0 ;
@@ -13,6 +15,6 @@ public:
                 l++ ;
             }
         } 
-        return ans == INT_MAX ? 0 : ans ;
+        return ans == INT_MAX ? 0 : ans ; // ternary operator used for optimization
     }
 };
