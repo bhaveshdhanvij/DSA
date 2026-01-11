@@ -9,20 +9,25 @@
 class Solution {
 public:
     ListNode *detectCycle(ListNode *head) {
+        // Floyd Warshall Algo 
+
         ListNode* fast = head ;
         ListNode* slow = head ;
+
         while ( fast && fast->next ) {
             slow = slow->next ;
             fast = fast->next->next ;
+
             if ( slow == fast ) {
                 slow = head ;
                 while ( fast != slow ) {
-                    fast = fast->next ;
                     slow = slow->next ;
+                    fast = fast->next ;
                 }
                 return slow ;
             }
         }
+
         return nullptr ;
     }
 };
