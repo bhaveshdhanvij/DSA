@@ -21,6 +21,8 @@ public:
 
 
         // Approach 2 : Floyd Warshall's Appearance 
+        // TC: O(N) , SC : O(1) 
+        // Most Optimal Space is optimised here as compared to hashtable approach 
         ListNode* fast = head ;
         ListNode* slow = head ;
         while ( fast && fast->next ) {
