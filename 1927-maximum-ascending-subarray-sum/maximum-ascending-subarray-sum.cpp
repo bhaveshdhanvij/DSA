@@ -1,6 +1,7 @@
 class Solution {
 public:
     int maxAscendingSum(vector<int>& a) {
+        // Simple Prefix sum array 
         int n = a.size() ;
         vector<int> t = a ;
 
