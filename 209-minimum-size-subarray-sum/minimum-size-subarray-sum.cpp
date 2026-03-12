@@ -1,20 +1,19 @@
 class Solution {
 public:
-    int minSubArrayLen(int target, vector<int>& nums) {
-        // Approach 1 : Sliding Window 
-        // TC : O(N) , SC : O(1)
-        int n = nums.size() ;
+    int minSubArrayLen(int t, vector<int>& a) {
         int ans = INT_MAX ;
-        int l = 0 ;
-        int sum = 0 ;
+        int n = a.size() ;
+
+        int curr = 0 , l = 0 ;
         for ( int r = 0 ; r < n ; r++ ) {
-            sum += nums[r] ;
-            while ( sum >= target ) {
+            curr += a[r] ;
+            while ( curr >= t ) {
                 ans = min ( ans , r - l + 1 ) ;
-                sum -= nums[l] ;
+                curr -= a[l] ;
                 l++ ;
             }
-        } 
-        return ans == INT_MAX ? 0 : ans ; // ternary operator used for optimization
+        }
+
+        return ans == INT_MAX ? 0 : ans ;
     }
 };
