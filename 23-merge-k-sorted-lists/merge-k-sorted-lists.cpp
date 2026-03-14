@@ -17,28 +17,28 @@ public:
 
         // Approach 3 : Using Min - Heap 
 
-        priority_queue<pair<int,ListNode*>,vector<pair<int,ListNode*>> ,greater<pair<int,ListNode*>>> pq ;
+        priority_queue<pair<int,ListNode*>,vector<pair<int,ListNode*>>,greater<pair<int,ListNode*>>> pq ;
 
         for ( int i = 0 ; i < lists.size() ; i++ ) {
             if ( lists[i] ) {
-                pq.push(make_pair(lists[i]->val , lists[i])) ;
+                pq.push({lists[i]->val , lists[i]}) ;
             }
         }
 
-        ListNode* ans = new ListNode(-1) ;
-        ListNode* temp = ans ;
+        ListNode* ans = new ListNode(0) ;
+        ListNode* curr = ans ;
 
-        while ( !pq.empty() ) {
+        while (!pq.empty()) {
             auto it = pq.top() ;
             pq.pop() ;
 
-            temp->next = it.second ;
+            curr->next = it.second ;
 
             if ( it.second->next ) {
-                pq.push(make_pair(it.second->next->val , it.second->next)) ;
+                pq.push({it.second->next->val , it.second->next}) ;
             }
 
-            temp = temp->next ;
+            curr = curr->next ;
         }
 
         return ans->next ;
