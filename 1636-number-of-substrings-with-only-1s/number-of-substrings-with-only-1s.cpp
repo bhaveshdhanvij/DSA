@@ -1,6 +1,7 @@
 class Solution {
 public:
     int numSub(string s) {
+        // TC : O(N) , SC : O(1) 
         const int mod = 1000000007 ;
         int n = s.length() ;
         long c = 0 , ans = 0 ;
