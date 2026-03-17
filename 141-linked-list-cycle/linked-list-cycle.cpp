@@ -9,22 +9,7 @@
 class Solution {
 public:
     bool hasCycle(ListNode *head) {
-        // // Approach 1 : HashMap ( Trace Appearance ) 
-        // unordered_map<ListNode*,int> umap ;
-        // ListNode* curr = head ;
-        // while ( curr ) {
-        //     if ( umap.count(curr) ) return true ;
-        //     umap[curr]++ ;
-        //     curr = curr->next ;
-        // }
-        // return false ;
-
-
-        // Approach 2 : Floyd Warshall's Appearance 
-        // TC: O(N) , SC : O(1) 
-        // Most Optimal Space is optimised here as compared to hashtable approach 
-        ListNode* fast = head ;
-        ListNode* slow = head ;
+        ListNode* slow = head , *fast = head ;
         while ( fast && fast->next ) {
             slow = slow->next ;
             fast = fast->next->next ;
