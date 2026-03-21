@@ -9,19 +9,19 @@ public:
         // TC : O(N**2) SC : O(N)
 
         int n = a.size() ;
-        
         vector<int> dp(n , 1) ;
-        int ans = 1 ;
-        
+
         for ( int i = 1 ; i < n ; i++ ) {
             for ( int j = 0 ; j < i ; j++ ) {
                 if ( a[i] > a[j] ) {
                     dp[i] = max ( dp[i] , dp[j] + 1 ) ;
                 }
             }
-            ans = max ( ans , dp[i] ) ;
         }
 
+        int ans = 1 ;
+        for ( int x : dp ) ans = max ( ans , x ) ;
+        
         return ans ;
     }
 };
