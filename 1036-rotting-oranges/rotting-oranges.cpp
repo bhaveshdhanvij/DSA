@@ -1,51 +1,49 @@
 class Solution {
 public:
-    int orangesRotting(vector<vector<int>>& grid) {
-        // BFS since at each minute every rooten orange is making fresh orange rotten 
-
-        int n = grid.size() ;
-        int m = grid[0].size() ;
-
+    int orangesRotting(vector<vector<int>>& a) {
+        // Optimal Approach : BFS (parallel processing)
+        // TC : O(N * M) , SC : O(N * M)
+        // BFS used since every rotten orange is making surrounding fresh orange rotten 
+        int n = a.size() , m = a[0].size() ;
         queue<pair<int,int>> q ;
-
-        int f = 0 ; // this is total fresh oranges count 
+        
+        int f = 0 ; // count of fresh oranges 
 
         for ( int i = 0 ; i < n ; i++ ) {
             for ( int j = 0 ; j < m ; j++ ) {
-                if ( grid[i][j] == 2 ) {
-                    q.push(make_pair(i , j)) ;
-                }else if ( grid[i][j] == 1 ) {
-                    f++ ;
-                }
+                if ( a[i][j] == 2 ) q.push({i , j}) ;
+                else if ( a[i][j] == 1 ) f++ ;
             }
         }
-
-        int ans = 0 ; // total minutes 
 
         int delRow[] = {-1 , 0 , 1 , 0} ;
         int delCol[] = {0 , 1 , 0 , -1} ;
 
+        int t = 0 ; // time taken ie ans
+
         while ( !q.empty() && f > 0 ) {
-            int s = q.size() ;
-            ans++ ;
+            int s = q.size() ; // current no of rotten oranges (curr level)
+            t++ ;
 
             while (s--) {
-                auto [r , c] = q.front() ;
+                auto p = q.front() ;
                 q.pop() ;
 
-                for ( int i = 0 ; i < 4 ; i++ ) {
-                    int nr = r + delRow[i] ;
-                    int nc = c + delCol[i] ;
+                int i = p.first , j = p.second ;
+
+                for ( int k = 0 ; k < 4 ; k++ ) {
+                    int nr = i + delRow[k] ;
+                    int nc = j + delCol[k] ;
                     
-                    if ( nr >= 0 && nr < n && nc >= 0 && nc < m && grid[nr][nc] == 1 ) {
+                    if ( nr >= 0 && nr < n && nc >= 0 && nc < m && a[nr][nc] == 1 ) {
                         f-- ;
-                        grid[nr][nc] = 2 ;
-                        q.push(make_pair(nr , nc)) ;
+                        a[nr][nc] = 2 ;
+                        q.push({nr , nc}) ;
                     }
                 }
             }
         }
 
-        return f == 0 ? ans : -1 ;
+        return f == 0 ? t : -1 ; // checking if all fresh oranges became rotten or not 
     }
 };
