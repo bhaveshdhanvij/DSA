@@ -1,14 +1,18 @@
 class Solution {
 public:
     bool isAnagram(string s, string t) {
-        // sort ( s.begin() , s.end() ) ;
-        // sort ( t.begin() , t.end() ) ;
-        // return s == t ;
+        if ( s.size() != t.size() ) return false ;
+    
+        vector<int> f(26 , 0) ;
+        for ( int i = 0 ; i < s.size() ; i++ ) {
+            f[s[i] - 'a']++ ;
+            f[t[i] - 'a']-- ;
+        }
 
+        for ( int i = 0 ; i < 26 ; i++ ) {
+            if ( f[i] != 0 ) return false ;
+        }
 
-        map<char,int> a , b ;
-        for ( char c : s ) a[c]++ ;
-        for ( char c : t ) b[c]++ ;
-        return a == b ;
+        return true ;
     }
 };
