@@ -1,6 +1,7 @@
 class Solution {
 public:
     int findPeakElement(vector<int>& a) {
+        // track whether the element is in increasing or decreasing curve 
         int n = a.size() ;
 
         if ( n == 1 ) return 0 ;
