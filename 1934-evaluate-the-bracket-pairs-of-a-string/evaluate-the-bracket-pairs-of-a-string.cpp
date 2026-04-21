@@ -7,8 +7,6 @@ public:
         int i = 0 , n = s.size() ;
         string ans = "" ;
 
-
-
         while ( i < n ) {
             if ( s[i] == '(' ) {
                 i++ ;
