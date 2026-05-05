@@ -12,23 +12,22 @@ class Solution {
 public:
     int helper(ListNode* head) {
         int ans = 0 ;
-        while ( head) {
+        while ( head ) {
             ans++ ;
             head = head->next ;
         }
         return ans ;
     }
-
     ListNode* rotateRight(ListNode* head, int k) {
         int n = helper(head) ;
         
-        if ( !head ) return nullptr ;
-
+        if (!head) return nullptr ;
+        
         k = k % n ;
-
         if ( k == 0 ) return head ;
 
         int t = n - k ;
+        
         ListNode* curr = head ;
         ListNode* prev = nullptr ;
 
@@ -39,10 +38,9 @@ public:
 
         ListNode* ans = curr ;
         prev->next = nullptr ;
+        while ( curr->next ) curr = curr->next ;
 
-        while (curr->next) curr = curr->next ;
         curr->next = head ;
-
         return ans ;
     }
 };
