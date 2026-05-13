@@ -2,7 +2,6 @@ class Node {
 public:
     Node* child[26] ;
     bool isend ;
-
     Node() {
         isend = false ;
         for ( int i = 0 ; i < 26 ; i++ ) {
@@ -18,9 +17,9 @@ public:
         root = new Node() ;
     }
     
-    void insert(string s) {
+    void insert(string word) {
         Node* node = root ;
-        for  ( char c : s ) {
+        for ( char c : word ) {
             int i = c - 'a' ;
             if ( node->child[i] == nullptr ) {
                 node->child[i] = new Node() ;
@@ -30,13 +29,14 @@ public:
         node->isend = true ;
     }
     
-    bool search(string s) {
+    bool search(string word) {
         Node* node = root ;
-        for ( char c : s ) {
+        for ( char c : word ) {
             int i = c - 'a' ;
             if ( node->child[i] == nullptr ) {
                 return false ;
             }
+
             node = node->child[i] ;
         }
 
@@ -47,11 +47,9 @@ public:
         Node* node = root ;
         for ( char c : s ) {
             int i = c - 'a' ;
-
             if ( node->child[i] == nullptr ) {
                 return false ;
             }
-
             node = node->child[i] ;
         }
         return true ;
