@@ -1,21 +1,29 @@
 class Solution {
 public:
-    int maxArea(vector<int>& a) {
-        int n = a.size() ;
-        int i = 0 , j = n - 1 ;
-        int ans = 0 ;
-        
-        while ( i < j ) {
-            int h = min ( a[i] , a[j] ) ;
-            int w = j - i ;
+    // Dunzo
+    // Flipkart
+    int maxArea(vector<int>& height) {
+        // Naive Approach : Nested loops : brute for each pair of sticks and calculate the maxx out of that
+        // TC : O(N ** 2) , SC : O(1) 
 
-            int curr = h * w ;
-            ans = max ( ans , curr ) ;
+        // Optimal Approach : 2-pointer Approach : moving the pointer at the shorter height to potentially get a taller line and a larger area 
+        // TC : O(N) , SC : O(1) 
 
-            if ( a[i] <= a[j] ) i++ ;
-            else j-- ;
+        int n = height.size() ;
+        int left = 0 , right = n - 1 ;
+        int maxArea = 0 ;
+
+        while ( left < right ) {
+            int width = right - left ;
+            int curr = min ( height[left] , height[right] ) ;
+
+            int currArea = curr * width ;
+            maxArea = max ( maxArea , currArea ) ;
+
+            if ( height[left] <= height[right] ) left++ ;
+            else right-- ;
         }
 
-        return ans ;
+        return maxArea ;
     }
 };
