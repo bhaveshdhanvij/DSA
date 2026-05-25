@@ -1,29 +1,39 @@
 class Solution {
+private:
+    
 public:
-    void s( vector<int>& a , int i , int j ) {
-        int temp = a[i] ;
-        a[i] = a[j] ;
-        a[j] = temp ;
-    }
-    void rev( vector<int>& a , int i , int j ) {
-        while ( i <= j ) {
-            swap(a[i] , a[j]) ;
-            i++ ;
-            j-- ;
-        }
-    }
-    void nextPermutation(vector<int>& a) {
-        int n = a.size() ;
-        int i = n - 2 ;
-        while ( i >= 0 && a[i] >= a[i + 1] ) i-- ;
+    // Uber
+    // Goldman Sachs
+    // Adobe
+    void nextPermutation(vector<int>& nums) {
+        // Naive Approach : finding all permutations using hashSet 
+        // TC : O(N * N!) , SC : O(n!) + O(n) 
 
-        if ( i < 0 ) {
-            rev(a , 0 , n - 1) ;
-        }else {
-            int j = n - 1 ;
-            while ( a[j] <= a[i] ) j-- ;
-            s( a , i , j ) ;
-            rev(a , i + 1 , n - 1) ;
+        // Optimal Approach : Next permutation algorithm 
+        // 1. Locate the rightmost decreasing algorithm 
+        // 2. Locate the next bigger component to exchange 
+        // 3.Reverse the right part after the swap (suffix) 
+
+        // TC : O(N) , SC : O(1) 
+        int n = nums.size() ;
+        int idx = -1 ;
+        
+        for ( int i = n - 2 ; i >= 0 ; i-- ) {
+            if ( nums[i] < nums[i + 1] ) {
+                idx = i ;
+                break ;
+            }
         }
+        
+        if ( idx != -1 ) {
+            for ( int i = n - 1 ; i > idx ; i-- ) {
+                if ( nums[i] > nums[idx] ) {
+                    swap(nums[i] , nums[idx]) ;
+                    break ;
+                }
+            }
+        }
+
+        reverse( nums.begin() + idx + 1 , nums.end() ) ;
     }
 };
