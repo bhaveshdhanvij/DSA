@@ -1,28 +1,25 @@
 class Solution {
 public:
     int numberOfSpecialChars(string s) {
-        vector<int> first(26 , -1) , last(26 , -1) ;
-        int n = s.size() ;
-        for ( int i = 0 ; i < n ; i++ ) {
-            int idx = -1 ;
+        vector<int> f(26 , -1) , l(26 , -1) ;
+        for ( int i = 0 ; i < s.size() ; i++ ) {
+            int idx ;
             if ( s[i] >= 'a' && s[i] <= 'z' ) {
                 idx = s[i] - 'a' ;
-                last[idx] = i ;
+                l[idx] = i ;
             }else {
                 idx = s[i] - 'A' ;
-                if ( first[idx] == -1 ) {
-                    first[idx] = i ;
+                if ( f[idx] == -1 ) {
+                    f[idx] = i ;
                 }
             }
-        }
-
+        } 
         int ans = 0 ;
         for ( int i = 0 ; i < 26 ; i++ ) {
-            if ( first[i] != -1 && last[i] != -1 && last[i] < first[i] ) {
+            if ( l[i] != -1 && f[i] != -1 && l[i] < f[i] ) {
                 ans++ ;
             }
         }
-
         return ans ;
     }
 };
