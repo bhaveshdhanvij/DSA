@@ -69,6 +69,8 @@ public:
 
         
         // Optimal Approach : Using merge sort 
+        // TC : O(Nlog(N)) , SC : O(N)
+        
         int low = 0 , high = nums.size() - 1 ;
         return mergeSort ( nums , low , high) ;
     }
