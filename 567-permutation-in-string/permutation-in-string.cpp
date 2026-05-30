@@ -47,7 +47,7 @@ public:
 
 
         // Optimal Approach : Sliding window + character frequency matching 
-        // 
+        // TC : O(M) , SC : O(1) 
         
         int n = s1.size() , m = s2.size() ;
         if ( n > m ) return false ;
