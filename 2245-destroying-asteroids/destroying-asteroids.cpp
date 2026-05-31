@@ -1,16 +1,15 @@
 class Solution {
 public:
-    bool asteroidsDestroyed(int m , vector<int>& a) {
+    bool asteroidsDestroyed(int m, vector<int>& a) {
+        long long t = m ;
         int n = a.size() ;
         sort ( a.begin() , a.end() ) ;
-
-        long long t = m ;
-
         for ( int i = 0 ; i < n ; i++ ) {
-            if ( t < a[i] ) return false ;
+            if ( t < a[i] ) {
+                return false ;
+            }
             t += a[i] ;
         }
-
         return true ;
     }
 };
