@@ -1,6 +1,9 @@
 class Solution {
 public:
     int search(vector<int>& a, int target) {
+        // Optimal Approach : binary search 
+        // TC : O(log(N)) , SC : O(1) 
+
         int n = a.size() ;
         int l = 0 , r = n - 1 ;
         while ( l <= r ) {
