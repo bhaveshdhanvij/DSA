@@ -1,16 +1,12 @@
 class Solution {
 public:
-    int minimumCost(vector<int>& cost) {
+    int minimumCost(vector<int>& a) {
         int ans = 0 ;
-
-        for ( int x : cost ) ans += x ;
-
-        sort ( cost.rbegin() , cost.rend() ) ;
-
-        for ( int i = 2 ; i < cost.size() ; i += 3 ) {
-            ans -= cost[i] ;
+        for ( int x : a ) ans += x ;
+        sort ( a.rbegin() , a.rend() ) ;
+        for ( int i = 2 ; i < a.size() ; i += 3 ) {
+            ans -= a[i] ;
         }
-
-        return ans ;    
+        return ans ;
     }
 };
