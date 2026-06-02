@@ -1,9 +1,13 @@
 class Solution {
 public:
+    // Meta
+    // Google
+    // Microsoft
+    // Amazon
     bool checkValidGrid(vector<vector<int>>& a) {
         // Optimal Approach : Basic backtracking 
         // TC : O(N ** 2) , SC : O(N ** 2)
-        
+
         int n = a.size() ;
         if ( a[0][0] != 0 ) return false ;
         vector<pair<int,int>> pos(n * n) ;
