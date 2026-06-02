@@ -1,33 +1,49 @@
 class Solution {
 public:
-    vector<vector<string>> partition(string s) {
-        vector<vector<string>> ans ;
-        vector<string> path ;
-        f(0 , s , path , ans) ;
-        return ans ;
-    }
+    // Meta
+    // Microsoft
+    // Amazon
+    // Adobe
+    // Infosys
+    vector<vector<string>> ans ;
+    vector<vector<bool>> dp ;
 
-    void f(int index , string &s , vector<string> &path , vector<vector<string>> &ans ) {
-        if ( index == s.length() ) {
+    // bool ispalindrome( string& s , int l , int r ) {
+    //     while ( l < r ) {
+    //         if ( s[l] != s[r] ) return false ;
+    //         l++ , r-- ;
+    //     }
+    //     return true ;
+    // }
+    void dfs(string& s , int st , vector<string>& path) {
+        if ( st == s.size() ) {
             ans.push_back(path) ;
             return ;
         }
 
-        for ( int i = index ; i < s.size() ; i++ ) {
-            if ( isPalindrome(s , index , i) ) {
-                path.push_back(s.substr(index , i - index + 1)) ;
-                f(i + 1 , s , path , ans) ;
+        for ( int end = st ; end < s.size() ; end++ ) {
+            if ( dp[st][end] ) {
+                path.push_back(s.substr(st , end - st + 1)) ;
+                dfs(s , end + 1 , path) ;
                 path.pop_back() ;
             }
         }
     }
+    vector<vector<string>> partition(string s) {
+        // Optimized recursion 
+        
+        int n = s.size() ;
+        dp.assign(n , vector<bool>(n , false)) ;
 
-    bool isPalindrome(string &s , int st , int end ) {
-        while ( st < end ) {
-            if ( s[st++] != s[end--] ) {
-                return false ;
+        for ( int i = n - 1 ; i >= 0 ; i-- ) {
+            for ( int j = i ; j < n ; j++ ) {
+                if ( s[i] == s[j] && (j - i <= 2 || dp[i + 1][j - 1])) {
+                    dp[i][j] = true ;
+                }
             }
         }
-        return true ;
+        vector<string> path ;
+        dfs(s , 0, path) ;
+        return ans ;
     }
 };
