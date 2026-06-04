@@ -8,19 +8,25 @@
  */
 class Solution {
 public:
+    // Amazon
+    // Oracle
+    // Paytm
+    // Google
+    // Microsoft
     ListNode *detectCycle(ListNode *head) {
-        // Floyd Warshall Algo 
+        // Optimal Approach : First detect the cycle using slow fast pointer and then reset slow and move both pointers by one , meeting point gives us the starting point of the cycle 
+        // TC : O(N) , SC : O(1)
 
-        ListNode* fast = head ;
         ListNode* slow = head ;
-
-        while ( fast && fast->next ) {
+        ListNode* fast = head ;
+        
+        while ( fast != nullptr && fast->next != nullptr ) {
             slow = slow->next ;
             fast = fast->next->next ;
 
-            if ( slow == fast ) {
+            if ( slow == fast ) { // cycle detected 
                 slow = head ;
-                while ( fast != slow ) {
+                while ( slow != fast ) {
                     slow = slow->next ;
                     fast = fast->next ;
                 }
@@ -28,6 +34,6 @@ public:
             }
         }
 
-        return nullptr ;
+        return nullptr ; // no cycle detected 
     }
 };
