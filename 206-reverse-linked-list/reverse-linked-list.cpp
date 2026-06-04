@@ -9,17 +9,34 @@
  * };
  */
 class Solution {
-public:
+public: 
+    // Google
+    // PayPal
+    // Microsoft
+    // Amazon
+    // Oracle
+    // Adobe
+    // Qualcomm
+    // Apple
+    // Meta
+    // JP morgan
+    // TCS
     ListNode* reverseList(ListNode* head) {
+        // Approach : By reversing the connection with the prev pointer
         // TC : O(N) , SC : O(1) 
+
         ListNode* prev = nullptr ;
         ListNode* curr = head ;
-        while ( curr ) {
-            ListNode* next = curr->next ;
+        ListNode* next = nullptr ;
+
+        while ( curr != nullptr ) {
+            next = curr->next ;
             curr->next = prev ;
+
             prev = curr ;
             curr = next ;
-        }
+        } 
+
         return prev ;
     }
 };
