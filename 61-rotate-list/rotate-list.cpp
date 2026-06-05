@@ -10,37 +10,56 @@
  */
 class Solution {
 public:
-    int helper(ListNode* head) {
-        int ans = 0 ;
-        while ( head ) {
-            ans++ ;
-            head = head->next ;
-        }
-        return ans ;
-    }
+    // Nvidia
+    // Meta
+    // Siemens
+    // Adobe
+    // Oracle
+    // Amazon
+    // Microsoft
+    // Google
+    // Infosys
+    // Morgan Stanley
     ListNode* rotateRight(ListNode* head, int k) {
-        int n = helper(head) ;
-        
-        if (!head) return nullptr ;
-        
+        // Approach 1 : Rotate list by 1 position exactly k times 
+        // TC : O(K * N) , SC : O(1) 
+
+        // Approach 2 : Storing nodes in vector and updates pointers using index cal 
+        // TC : O(N) , SC : O(N) 
+
+        // Optimal Approach : Greedy new tail will be at pos (n - k - 1) 
+        // TC : O(N) , SC : O(1) 
+
+        if (!head || k == 0 || !head->next) {
+            return head ;
+        }
+
+        int n = 1 ;
+        ListNode* tail = head ;
+        while (tail->next) {
+            n++ ;
+            tail = tail->next ;
+        }
+
         k = k % n ;
-        if ( k == 0 ) return head ;
 
-        int t = n - k ;
+        if ( k == 0 ) {
+            return head ;
+        }
+
+        tail->next = head ;
         
-        ListNode* curr = head ;
-        ListNode* prev = nullptr ;
+        int steps = n - k - 1 ;
 
-        while (t--) {
-            prev = curr ;
+        ListNode* curr = head ;
+        while ( steps-- ) {
             curr = curr->next ;
         }
 
-        ListNode* ans = curr ;
-        prev->next = nullptr ;
-        while ( curr->next ) curr = curr->next ;
+        ListNode* ans = curr->next ;
 
-        curr->next = head ;
+        curr->next = nullptr ;
+        
         return ans ;
     }
 };
