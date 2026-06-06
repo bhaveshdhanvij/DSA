@@ -10,6 +10,7 @@ public:
     // Morgan Stanley
     vector<int> nextGreaterElement(vector<int>& nums1, vector<int>& nums2) {
         // Optimal Approach : Calculate the NG for every element in nums2 and then map it for nums1 ans storage
+        // TC : O(N + M) , SC : O(N + M) 
         
         unordered_map<int,int> mp ; // nums2 -> NG 
         stack<int> s ;
