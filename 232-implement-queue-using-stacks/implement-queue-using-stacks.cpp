@@ -1,34 +1,46 @@
 class MyQueue {
-private:
-    stack<int> a , b ;
-    void t() {
-        while (!a.empty()) {
-            b.push(a.top()) ;
-            a.pop() ;
-        }
-    }
 public:
-    MyQueue() {}
+    // Adobe
+    // Amazon
+    // Google
+    // Microsoft
+    // Oracle
+    // Uber
+
+    stack<int> s1 , s2 ;
+    MyQueue() {
+        
+    }
     
+
     void push(int x) {
-        a.push(x) ;
+        // O(N) 
+
+        while (!s1.empty()) {
+            s2.push(s1.top()) ;
+            s1.pop() ;
+        }
+
+        s1.push(x) ;
+        
+        while (!s2.empty()) {
+            s1.push(s2.top()) ;
+            s2.pop() ;
+        }
     }
     
     int pop() {
-        if ( b.empty() ) t() ;
-        int x = b.top() ;
-        b.pop() ;
-
-        return x ; 
+        int ans = s1.top() ;
+        s1.pop() ;
+        return ans ;
     }
     
     int peek() {
-        if ( b.empty() ) t() ;
-        return b.top() ;
+        return s1.top() ;
     }
     
     bool empty() {
-        return a.empty() && b.empty() ;
+        return s1.empty() ;
     }
 };
 
