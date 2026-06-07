@@ -1,58 +1,96 @@
 class LRUCache {
 public:
+    // Amazon
+    // Miro
+    // Ebay
+    // Microsoft
+    // Uber
+    // Visa
+    // Oracle
+    // Intuit
+    // Samsung
+    // PayPal
+
     class Node {
     public:
-        int key , value ;
-        Node* prev , *next ;
-        Node( int key , int value) {
-            this->key = key ;
-            this->value = value ;
+        int key , val ;
+        Node* next ;
+        Node* prev ;
+
+        Node(int k , int v) {
+            key = k ;
+            val = v ;
+            next = prev = nullptr ;
         }
     };
-    Node* head = new Node(0 , 0) , *tail = new Node(0 , 0) ;
-    int capacity ;
+
+    Node* head ;
+    Node* tail ;
+
     unordered_map<int,Node*> mp ;
 
+    int lim ;
+
+    void addnode (Node* node) {
+        Node* temp = head->next ; // previously MSU
+        
+        head->next = node ; // new node ;
+
+        node->prev = head ; // designing connections 
+        node->next = temp ;
+
+        temp->prev = node ; // for prev node too 
+    }
+
+    void delnode(Node* node) {
+        Node* prev = node->prev ;
+        Node* next = node->next ;
+
+        prev->next = next ;
+        next->prev = prev ;
+    }
+
+
     LRUCache(int capacity) {
-        this->capacity = capacity ;
+        lim = capacity ;    
+        
+        head = new Node(-1 , -1) ;
+        tail = new Node(-1 , -1) ;
+
         head->next = tail ;
         tail->prev = head ;
     }
     
     int get(int key) {
-        if ( mp.count(key) ) {
-            Node* node = mp[key] ;
-            remove(node) ;
-            insert(node) ;
-            return node->value ;
-        }else {
-            return -1 ;
-        }
+        if ( !mp.count(key) ) return -1 ;
+        
+        int ans = mp[key]->val ;
+        
+        delnode(mp[key]) ; // delete that particular code in the middle 
+        addnode(mp[key]) ; // add that node to the front 
+
+        return ans ;
     }
     
     void put(int key, int value) {
         if ( mp.count(key) ) {
-            remove(mp[key]) ;
+            Node* old = mp[key] ;
+            delnode(old) ;
+            mp.erase(key) ;
+            delete old ;
         }
-        if ( capacity == mp.size() ) {
-            remove(tail->prev) ;
+
+        if ( mp.size() == lim ) {
+            Node* lru = tail->prev ;
+            mp.erase(lru->key) ;
+            delnode(lru) ;
+            delete lru ;
         }
-        insert(new Node(key , value)) ;
-    }
 
-    void remove(Node* node) {
-        mp.erase(node->key) ;
-        node->prev->next = node->next ;
-        node->next->prev = node->prev ;
-    }
-
-    void insert(Node* node) {
-        mp[node->key] = node ;
-        Node* headnext = head->next ;
-        head->next = node ;
-        node->prev = head ;
-        node->next = headnext ;
-        headnext->prev = node ;
+        Node* newnode = new Node(key , value) ;
+        
+        addnode(newnode) ; // adds to the front 
+        mp[key] = newnode ;
     }
 };
 
