@@ -11,6 +11,9 @@ public:
     // Samsung
     // PayPal
 
+    // Optimal Approach : Using two DS ie Doubly Linked List + unordered hashMap for node retrival
+    // TC : O(1) for both put and get queries
+
     class Node {
     public:
         int key , val ;
