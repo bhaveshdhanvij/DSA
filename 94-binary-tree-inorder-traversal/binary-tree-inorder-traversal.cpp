@@ -11,17 +11,49 @@
  */
 class Solution {
 public:
-    void inorder(TreeNode* root , vector<int>& a) {
-        if (!root ) return ;
+    // Adobe
+    // Uber
+    // Meta
+    // Google
+    // Amazon
+    // Microsoft
 
-        inorder(root->left , a ) ;
-        a.push_back(root->val) ;
-
-        inorder(root->right, a) ;
-    }
+    // void helper(TreeNode* root , vector<int> &ans ) {
+    //     if (!root) return ;
+    //     helper(root->left , ans) ;
+    //     ans.push_back(root->val) ;
+    //     helper(root->right , ans) ;
+    // }
     vector<int> inorderTraversal(TreeNode* root) {
-        vector<int> a ;
-        inorder(root , a) ;
-        return a ;
+        // Approach 1 : Recursive Approach 
+        // TC : O(N) , SC : O(h) - height 
+
+        // vector<int> ans ;
+        // helper(root , ans) ;
+        // return ans ;
+
+        // Approach 2 : Iterative stack based 
+        // TC : O(N) , SC : O(N) 
+
+        vector<int> ans ;
+        TreeNode* curr = root ;
+
+        stack<TreeNode*> st ;
+
+        while( curr != nullptr || !st.empty() ) {
+            while ( curr != nullptr ) {
+                st.push(curr) ;
+                curr = curr->left ;
+            }
+
+            curr = st.top() ;
+            st.pop() ;
+
+            ans.push_back(curr->val) ; 
+
+            curr = curr->right ;
+        }
+        
+        return ans ;
     }
 };
