@@ -21,7 +21,9 @@ public:
     // Linkedin
     // TCS
     bool isSameTree(TreeNode* a, TreeNode* b) {
-        // 
+        // Approach : basic recursive approach 
+        // TC : O(N) , SC : O(N) 
+        
         if ( a == nullptr && b == nullptr ) return true ;
         if ( a == nullptr || b == nullptr ) return false ;
 
