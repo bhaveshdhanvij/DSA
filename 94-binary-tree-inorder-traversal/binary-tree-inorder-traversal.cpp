@@ -18,6 +18,13 @@ public:
     // Amazon
     // Microsoft
 
+    // Uber
+    // Google
+    // Apple
+    // Adobe
+    // Microsoft
+    // Amazon
+
     // void helper(TreeNode* root , vector<int> &ans ) {
     //     if (!root) return ;
     //     helper(root->left , ans) ;
@@ -35,25 +42,66 @@ public:
         // Approach 2 : Iterative stack based 
         // TC : O(N) , SC : O(N) 
 
+        // vector<int> ans ;
+        // TreeNode* curr = root ;
+
+        // stack<TreeNode*> st ;
+
+        // while( curr != nullptr || !st.empty() ) {
+        //     while ( curr != nullptr ) {
+        //         st.push(curr) ;
+        //         curr = curr->left ;
+        //     }
+
+        //     curr = st.top() ;
+        //     st.pop() ;
+
+        //     ans.push_back(curr->val) ; 
+
+        //     curr = curr->right ;
+        // }
+        
+        // return ans ;
+
+        // Optimal Approach : Morris Inorder Traversal 
+        // TC : O(N) , SC : O(1) 
+
+        // For every node :
+        // No left child -> visit and go right 
+        // left child exists ->
+        // pred->right == nullptr -> create thread , go left 
+        // pred->right == curr -> remove thread , visit and go right 
+
         vector<int> ans ;
         TreeNode* curr = root ;
+        while ( curr ) {
+            
+            // case 1 : no left subtree
+            if ( curr->left == nullptr ) {
+                ans.push_back(curr->val) ;
+                curr = curr->right ;
+            }else{
+                // case 2 : left subtree exists 
+                TreeNode* pred = curr->left ;
+                
+                while ( pred->right && pred->right != curr){
+                    pred = pred->right ;
+                }
 
-        stack<TreeNode*> st ;
+                // first visit 
+                if ( pred->right == nullptr ) {
+                    pred->right = curr ; // create thread 
+                    curr = curr->left ;
+                }else {
+                    // second visit 
 
-        while( curr != nullptr || !st.empty() ) {
-            while ( curr != nullptr ) {
-                st.push(curr) ;
-                curr = curr->left ;
+                    pred->right = nullptr ; // remove thread 
+                    ans.push_back(curr->val) ;
+                    curr = curr->right ;
+                }
             }
-
-            curr = st.top() ;
-            st.pop() ;
-
-            ans.push_back(curr->val) ; 
-
-            curr = curr->right ;
         }
-        
+
         return ans ;
     }
 };
