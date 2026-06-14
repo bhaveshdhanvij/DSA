@@ -11,21 +11,30 @@
  */
 class Solution {
 public:
-    void inorder( TreeNode* root , vector<int>& a ) {
-        if (!root) return ;
+    // citadel
+    // Uber
+    // Salesforce
+    // Google
+    // Adobe
+    // Oracle
+    // Amazon
+    // IBM
+    bool helper(TreeNode* root , TreeNode* min , TreeNode* max ) {
+        if (root == nullptr) return true ;
 
-        inorder(root->left , a) ;
-        a.push_back(root->val) ;
-        inorder(root->right , a) ;
-    }
-    bool isValidBST(TreeNode* root) {
-        vector<int> a ;
-        inorder(root , a) ;
+        if ( min != nullptr && root->val <= min->val ) {
+            return false ;
+        } 
 
-        for ( int i = 0 ; i < a.size() - 1 ; i++ ) {
-            if ( a[i] >= a[i + 1] ) return false ;
+        if ( max != nullptr && root->val >= max->val ) {
+            return false ;
         }
 
-        return true ;
+        return helper(root->left , min , root) && helper(root->right , root , max) ;
+    }
+    bool isValidBST(TreeNode* root) {
+        // Approach : Range check
+        // TC : O(N) , SC : O(N)  
+        return helper(root , nullptr , nullptr) ;
     }
 };
