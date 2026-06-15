@@ -18,25 +18,50 @@ public:
 
 class Solution {
 public:
+    // Amazon
+    // Adobe
+    // Flipkart
+    // Salesforce
+    // Oracle
     Node* connect(Node* root) {
-        if(!root) return root ;
+        // Optimal Approach : Level order traversal with prev pointer 
+        // TC : O(N) , SC : O(W) 
+
+        if ( root == NULL || root->left == NULL ) {
+            return root ;
+        }
+
         queue<Node*> q ;
         q.push(root) ;
-        while ( q.size() > 0 ) {
-            int n = q.size() ;
-            vector<Node*> a ;
-            for ( int i = 0 ; i < n ; i++ ) {
-                Node* node = q.front() ;
-                q.pop() ;
-                a.push_back(node) ;
+        q.push(NULL) ;
 
-                if ( node->left ) q.push(node->left) ;
-                if ( node->right ) q.push(node->right) ;
+        Node* prev = NULL ;
+        while (q.size() > 0) {
+            Node* curr = q.front() ;
+            q.pop() ;
+
+            if ( curr == NULL ) {
+                if ( q.size() == 0 ) {
+                    break ;
+                }
+                q.push(NULL) ;
+            }else {
+                if ( curr->left ) {
+                    q.push(curr->left) ;
+                }
+
+                if ( curr->right ) {
+                    q.push(curr->right) ;
+                }
+
+                if ( prev != NULL ) {
+                    prev->next = curr ;
+                }
             }
-            for ( int i = 1 ; i < a.size() ; i++ ) {
-                a[i - 1]->next = a[i] ;
-            }
-        } 
+
+            prev = curr ;
+        }
+
         return root ;
     }
 };
