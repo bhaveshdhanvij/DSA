@@ -1,11 +1,28 @@
 class MedianFinder {
 public:
+    // Pinterest
+    // Google
+    // Apple
+    // Amazon
+    // Goldman Sachs
+    // Microsoft
+    // PayPal
+    // Oracle
+    // Meta
+
+    // Optimal Approach : Using two heaps :
+    // Max Heap => for left 
+    // Min Heap => for right 
+
     priority_queue<int> left ;
+
     priority_queue<int,vector<int>,greater<int>> right ;
+
     MedianFinder() {}
     
     void addNum(int num) {
         left.push(num) ;
+        
         right.push(left.top()) ;
         left.pop() ;
 
@@ -16,9 +33,11 @@ public:
     }
     
     double findMedian() {
-        if ( left.size() > right.size() ) return left.top() ;
+        if ( left.size() > right.size() ) {
+            return left.top() ;
+        }
 
-        return (left.top() + right.top()) / 2.0 ; 
+        return ( left.top() + right.top() ) / 2.0 ;
     }
 };
 
