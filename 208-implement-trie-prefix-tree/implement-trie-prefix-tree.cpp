@@ -1,18 +1,27 @@
-class Node {
+// Meta
+// Nvidia
+// Google
+// Uber
+// Samsung
+// Amazon
+// Microsoft
+
+class Node{
 public:
     Node* child[26] ;
     bool isend ;
+
     Node() {
         isend = false ;
         for ( int i = 0 ; i < 26 ; i++ ) {
-            child[i] = nullptr ;
+            child[i] = NULL ;
         }
     }
 };
+
 class Trie {
-private:
-    Node* root ;
 public:
+    Node* root ;
     Trie() {
         root = new Node() ;
     }
@@ -20,38 +29,42 @@ public:
     void insert(string word) {
         Node* node = root ;
         for ( char c : word ) {
-            int i = c - 'a' ;
-            if ( node->child[i] == nullptr ) {
-                node->child[i] = new Node() ;
+            int idx = c - 'a' ;
+            if ( node->child[idx] == NULL ) {
+                node->child[idx] = new Node() ;
             }
-            node = node->child[i] ;
+
+            node = node->child[idx] ;
         }
+
         node->isend = true ;
     }
     
     bool search(string word) {
         Node* node = root ;
         for ( char c : word ) {
-            int i = c - 'a' ;
-            if ( node->child[i] == nullptr ) {
+            int idx = c - 'a' ;
+            if ( node->child[idx] == NULL ) {
                 return false ;
             }
 
-            node = node->child[i] ;
+            node = node->child[idx] ;
         }
 
         return node->isend ;
     }
     
-    bool startsWith(string s) {
+    bool startsWith(string prefix) {
         Node* node = root ;
-        for ( char c : s ) {
-            int i = c - 'a' ;
-            if ( node->child[i] == nullptr ) {
+        for ( char c : prefix ) {
+            int idx = c - 'a' ;
+            if ( node->child[idx] == NULL ) {
                 return false ;
             }
-            node = node->child[i] ;
+
+            node = node->child[idx] ;
         }
+
         return true ;
     }
 };
