@@ -7,6 +7,9 @@ public:
     // Oracle
     // DE Shaw
     int findCheapestPrice(int n, vector<vector<int>>& f, int src, int dst, int k) {
+        // Optimal Approach : BFS with Cost Relaxation
+        // TC : O(E * K) , SC : O(V + E) 
+        
         vector<pair<int,int>> g[n] ; // u => (v , wt)
 
         for ( int i = 0 ; i < f.size() ; i++ ) {
