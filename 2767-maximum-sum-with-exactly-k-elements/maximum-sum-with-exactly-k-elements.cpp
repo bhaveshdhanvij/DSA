@@ -3,8 +3,10 @@ public:
     int maximizeSum(vector<int>& a, int k) {
         int maxx = *max_element(a.begin() , a.end()) ;
         
-        int t = k - 1 ;
-        
-        return ( maxx * k ) + ( ( t * (t + 1) ) / 2 ) ;
+        int l = maxx + k - 1 ;
+        int right = l * (l + 1) / 2 ;
+        int left = (maxx - 1) * (maxx) / 2 ;
+
+        return right - left ;
     }
 };
