@@ -7,8 +7,7 @@ public:
         for ( char c : s ) {
             int idx = c - 'a' ;
             if ( !vis[idx] ) {
-                
-                while ( !st.empty() && st.back() > c ) {
+                while (!st.empty() && st.back() > c ) {
                     int topidx = st.back() - 'a' ;
                     if ( f[topidx] > 0 ) {
                         vis[topidx] = 0 ;
@@ -17,7 +16,6 @@ public:
                         break ;
                     }
                 }
-
                 vis[idx] = 1 ;
                 st.push_back(c) ;
             }
