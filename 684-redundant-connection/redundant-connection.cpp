@@ -1,45 +1,44 @@
+class DSU {
+public:
+    vector<int> parent ;
+    vector<int> size ;
+    DSU(int n) {
+        parent.resize(n + 1) ;
+        size.resize(n + 1 , 1) ;
+        for ( int i = 0 ; i <= n ; i++ ) {
+            parent[i] = i ;
+        }
+    }
+
+    int find(int x) {
+        if ( parent[x] == x ) {
+            return x ;
+        }
+        return parent[x] = find(parent[x]) ; // Path compresssion 
+    }
+    void unite(int a , int b) {
+        a = find(a) ;
+        b = find(b) ;
+        if ( a == b ) return ;
+        if ( size[a] < size[b] ) swap(a , b) ;
+        parent[b] = a ;
+        size[a] += size[b] ;
+    }
+};
 class Solution {
 public:
-    // Microsoft
-    // Google
-    // Amazon
-    // InMobi
-    bool helper(int u , int target , vector<vector<int>> &g , vector<bool> &vis ) {
-        if ( u == target ) {
-            return true ;
+    vector<int> findRedundantConnection(vector<vector<int>>& e) {
+        int n = e.size() ;
+        DSU dsu(n) ;
+        for ( int i = 0 ; i < n ; i++ ) {
+            int a = e[i][0] ;
+            int b = e[i][1] ;
+            a = dsu.find(a) ;
+            b = dsu.find(b) ;
+            if ( a == b ) return e[i] ;
+
+            dsu.unite(a , b) ;
         }
-
-        vis[u] = true ;
-
-        for ( int v: g[u] ) {
-            if ( !vis[v] && helper(v, target , g , vis)) {
-                return true ;
-            }
-        }
-
-        return false ;
-    }
-    vector<int> findRedundantConnection(vector<vector<int>>& edges) {
-        // Incremental Graph Construction + DFS Connectivity Check
-        // TC : O(N * N) , SC : O(N)
-
-        int n = edges.size() ;
-        vector<vector<int>> g(n + 1) ; // since it is having one-based indexing 
-
-        for ( auto &e : edges ) {
-            int u = e[0] ;
-            int v = e[1] ;
-            
-            vector<bool> vis(n + 1 , false) ;
-
-            if ( helper(u , v , g , vis) ) {
-                return e ; // this edge is creating the problem
-            }
-
-            g[u].push_back(v) ;
-            g[v].push_back(u) ;
-        }
-
-        return {} ;
+        return {-1 , -1} ;
     }
 };
