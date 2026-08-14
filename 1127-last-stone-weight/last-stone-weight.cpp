@@ -5,8 +5,11 @@ public:
         for ( int x : a ) pq.push(x) ;
 
         while ( pq.size() > 1 ) {
-            int x = pq.top() ; pq.pop() ;
-            int y = pq.top() ; pq.pop() ;
+            int x = pq.top() ;
+            pq.pop() ;
+            
+            int y = pq.top() ;
+            pq.pop() ;
 
             if ( x != y ) {
                 pq.push(x - y) ;
