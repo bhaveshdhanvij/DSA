@@ -2,30 +2,25 @@ class Solution {
 public:
     string evaluate(string s, vector<vector<string>>& k) {
         unordered_map<string,string> mp ;
-        for ( auto x : k ) mp[x[0]] = x[1] ;
-
-        int i = 0 , n = s.size() ;
+        for ( auto p : k ) {
+            mp[p[0]] = p[1] ;
+        }
         string ans = "" ;
-
-        while ( i < n ) {
+        for ( int i = 0 ; i < s.size() ; i++ ) {
             if ( s[i] == '(' ) {
-                i++ ;
                 string t = "" ;
-                while ( i < n && s[i] != ')' ) {
-                    t += s[i] ;
-                    i++ ;
+                int j = i + 1 ;
+                while ( s[j] != ')' ) {
+                    t += s[j] ;
+                    j++ ;
                 }
-                if (mp.count(t)) {
-                    ans += mp[t] ;
-                }else {
-                    ans += '?' ;
-                }
+                if ( mp.count(t) ) ans += mp[t] ;
+                else ans += '?' ;
+                i = j ;
             }else {
                 ans += s[i] ;
             }
-            i++ ;
         } 
-
         return ans ;
     }
 };
